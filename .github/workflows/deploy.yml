@@ -1,0 +1,37 @@
+name: Deploy .NET 8 App to Railway
+
+on:
+  push:
+    branches:
+      - main  # أو غيّرها حسب الفرع اللي تشتغل عليه
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Publish
+        run: dotnet publish -c Release -o ./publish --self-contained true -r linux-x64 /p:PublishSingleFile=true /p:PublishTrimmed=false
+
+      - name: Install Railway CLI
+        run: npm install -g railway
+
+      - name: Login to Railway
+        run: railway login --apiKey ${{ secrets.RAILWAY_API_KEY }}
+
+      - name: Deploy to Railway
+        run: railway up --service api-cicd ./publish  # غيّر `api-cicd` لاسم خدمتك إن لزم
