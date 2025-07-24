@@ -19,13 +19,13 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore ./src/MyApi.csproj
+        run: dotnet restore ./src/API on Railway with CICD.csproj
 
       - name: Build
-        run: dotnet build ./src/MyApi.csproj --configuration Release --no-restore
+        run: dotnet build ./src/API on Railway with CICD.csproj --configuration Release --no-restore
 
       - name: Publish
-        run: dotnet publish ./src/MyApi.csproj -c Release -o ./publish --self-contained true -r linux-x64 /p:PublishSingleFile=true /p:PublishTrimmed=false
+        run: dotnet publish ./src/API on Railway with CICD.csproj -c Release -o ./publish --self-contained true -r linux-x64 /p:PublishSingleFile=true /p:PublishTrimmed=false
 
       - name: Install Railway CLI (new)
         run: npm install -g @railway/cli
