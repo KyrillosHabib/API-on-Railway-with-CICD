@@ -3,7 +3,7 @@ name: Deploy .NET 8 App to Railway
 on:
   push:
     branches:
-      - main  # أو غيّرها حسب الفرع اللي تشتغل عليه
+      - master
 
 jobs:
   build-and-deploy:
