@@ -3,7 +3,7 @@ name: Deploy .NET 8 App to Railway
 on:
   push:
     branches:
-      - master
+      -master
 
 jobs:
   build-and-deploy:
@@ -27,11 +27,11 @@ jobs:
       - name: Publish
         run: dotnet publish -c Release -o ./publish --self-contained true -r linux-x64 /p:PublishSingleFile=true /p:PublishTrimmed=false
 
-      - name: Install Railway CLI
-        run: npm install -g railway
+      - name: Install Railway CLI (new)
+        run: npm install -g @railway/cli
 
       - name: Login to Railway
         run: railway login --apiKey ${{ secrets.RAILWAY_API_KEY }}
 
       - name: Deploy to Railway
-        run: railway up --service api-cicd ./publish  # غيّر `api-cicd` لاسم خدمتك إن لزم
+        run: railway up --service api-cicd ./publish
