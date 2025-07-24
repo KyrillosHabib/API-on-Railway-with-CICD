@@ -1,0 +1,6 @@
+@API_on_Railway_with_CICD_HostAddress = http://localhost:5200
+
+GET {{API_on_Railway_with_CICD_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
